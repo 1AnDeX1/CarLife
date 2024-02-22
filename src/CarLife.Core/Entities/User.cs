@@ -11,6 +11,9 @@ public class User
     public string? Name { get; set; }
     public string? Email { get; set; }
     public string? Password { get; set; }
+    public double? Rating { get; set; }
     public ICollection<User>? UsersId { get; set; }
     public ICollection<Purchase>? PurchaseId { get; set;}
+    public ICollection<Favorite>? FavoriteId{ get; set; }
+    public ICollection<ServiceStation>? ServiceStationId { get; set; }
 }
