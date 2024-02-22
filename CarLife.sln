@@ -25,11 +25,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CarLife.Infrastructure", "s
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CarLife.Shared", "src\CarLife.Shared\CarLife.Shared.csproj", "{28509BC4-9F43-4947-841D-63210C20C027}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CarLife.WebUI", "src\CarLife.WebUI\CarLife.WebUI.csproj", "{31EEF573-2227-4754-B0A5-D90459D8E985}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CarLife.WebUI", "src\CarLife.WebUI\CarLife.WebUI.csproj", "{31EEF573-2227-4754-B0A5-D90459D8E985}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CarLife.WebAPI", "src\CarLife.WebAPI\CarLife.WebAPI.csproj", "{5CC9C81C-1901-42A1-96D7-D622B5E59E66}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CarLife.WebAPI", "src\CarLife.WebAPI\CarLife.WebAPI.csproj", "{5CC9C81C-1901-42A1-96D7-D622B5E59E66}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CarLife.IdentityServer", "src\CarLife.IdentityServer\CarLife.IdentityServer.csproj", "{26666192-06C4-40EA-BBE4-E2CB692395F9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CarLife.IdentityServer", "src\CarLife.IdentityServer\CarLife.IdentityServer.csproj", "{26666192-06C4-40EA-BBE4-E2CB692395F9}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CarLife.Application.Tests", "tests\CarLife.Application.Tests\CarLife.Application.Tests.csproj", "{C691E7DE-B539-4427-97ED-08640469B647}"
 EndProject
