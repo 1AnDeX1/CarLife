@@ -1,4 +1,4 @@
-﻿namespace CarLife.WebUI.Tests;
+﻿namespace CartLife.IdentityServer.Tests;
 
 internal class Program
 {

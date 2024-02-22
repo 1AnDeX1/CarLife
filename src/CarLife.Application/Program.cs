@@ -1,4 +1,4 @@
-﻿namespace CarLife.WebUI.Tests;
+﻿namespace CarLife.Application;
 
 internal class Program
 {
