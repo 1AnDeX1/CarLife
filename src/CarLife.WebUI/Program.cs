@@ -1,3 +1,6 @@
+﻿using Microsoft.EntityFrameworkCore;
+using CarLife.Infrastructure.Data;
+
 namespace CarLife.WebUI;
 
 public class Program
@@ -8,7 +11,11 @@ public class Program
 
     // Add services to the container.
     builder.Services.AddControllersWithViews();
-
+    builder.Services.AddStorage(builder.Configuration);
+    builder.Services.AddDbContext<CarLifeDbContext>(options =>
+    {
+      options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
+    });
     var app = builder.Build();
 
     // Configure the HTTP request pipeline.
