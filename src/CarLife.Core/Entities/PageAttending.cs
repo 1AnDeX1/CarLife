@@ -10,5 +10,5 @@ public class PageAttending
     public int Id { get; set; }
     public Car? Car { get; set; }
     public int Count { get; set; }
-    public DateTime? dateOfAttending { get; set; }
+    public DateTime? DateOfAttending { get; set; }
 }

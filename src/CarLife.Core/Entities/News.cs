@@ -7,9 +7,10 @@ using System.Threading.Tasks;
 namespace CarLife.Core.Entities;
 public class News
 {
-    public int Id { get; set; }
-    public string? Title { get; set; }
-    public string? Description { get; set; }
-    public string? Photo {  get; set; }
-    public string? Theme { get; set; }
+  public int Id { get; set; }
+  public string? Title { get; set; }
+  public string? Description { get; set; }
+  public string? Photo {  get; set; }
+  public string? Theme { get; set; }
+  public DateTime? DateOfPost { get; set; }
 }
