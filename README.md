@@ -7,11 +7,13 @@ Main features:
   - add to favorite (like)
   - chat with seller
   - rate a seller
+  - info about purchase
 2) Selling auto
   - page to input details of the car you wanna sell
   - user car page of seling cars list 
   - chats with buyers
   - add statistic of your page attending
+  - info about selling
 3) news
   - news page
   - filter of news themes
