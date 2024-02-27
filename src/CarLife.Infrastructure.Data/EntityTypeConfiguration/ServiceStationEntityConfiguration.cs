@@ -5,6 +5,6 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace CarLife.Infrastructure.Data.EntityTypeConfiguration;
-internal class ServiceStationEntityConfiguration
+public class ServiceStationEntityConfiguration
 {
 }

@@ -19,8 +19,8 @@ public class Car
   public DateTime YearOfManufecture { get; set; }
   public string? City { get; set; }
   public string? Colour { get; set; } 
-  public ICollection<User>? UserId { get; set; }
-  public ICollection<Purchase>? PurchaseId { get; set; }
-  public ICollection<FavoriteCars>? FavoriteId{ get; set; }
-  public ICollection<PageAttending>? PageAttendingId{ get; set; }
+  public ICollection<User>? Users { get; set; }
+  public ICollection<Purchase>? Purchases { get; set; }
+  public ICollection<FavoriteCars>? Favorites{ get; set; }
+  public ICollection<PageAttending>? PageAttendings{ get; set; }
 }

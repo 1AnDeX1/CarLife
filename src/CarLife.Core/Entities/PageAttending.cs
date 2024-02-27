@@ -8,7 +8,8 @@ namespace CarLife.Core.Entities;
 public class PageAttending
 {
     public int Id { get; set; }
-    public Car? Car { get; set; }
+    public int CarId { get; set; }
     public int Count { get; set; }
     public DateTime DateOfAttending { get; set; }
+    public Car? Car { get; set; }
 }
