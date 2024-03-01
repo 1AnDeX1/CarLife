@@ -15,7 +15,7 @@ public static class RegistrationExtension
   {
     serviceCollection.AddDbContext<CarLifeDbContext>(options =>
     {
-      options.UseSqlServer(configuration["ConnectionStrings:DefaultConnection"]);
+      options.UseSqlServer(configuration["ConnectionStrings:MyConnection"]);
     } );
   }
 }
