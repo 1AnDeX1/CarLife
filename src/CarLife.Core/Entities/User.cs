@@ -8,8 +8,7 @@ using Microsoft.AspNetCore.Identity;
 namespace CarLife.Core.Entities;
 public class User : IdentityUser
 {
-  public string? Name { get; set; }
-  public double Rating { get; set; }
+  public double? Rating { get; set; }
 
   public ICollection<Purchase>? Purchases { get; set;}
   public ICollection<FavoriteCars>? FavoriteCars{ get; set; }

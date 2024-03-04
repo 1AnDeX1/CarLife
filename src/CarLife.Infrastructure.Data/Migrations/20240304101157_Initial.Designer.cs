@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CarLife.Infrastructure.Data.Migrations
 {
     [DbContext(typeof(CarLifeDbContext))]
-    [Migration("20240301175233_Initial")]
+    [Migration("20240304101157_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -244,11 +244,6 @@ namespace CarLife.Infrastructure.Data.Migrations
                     b.Property<DateTimeOffset?>("LockoutEnd")
                         .HasColumnType("datetimeoffset");
 
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
-
                     b.Property<string>("NormalizedEmail")
                         .HasMaxLength(256)
                         .HasColumnType("nvarchar(256)");
@@ -266,7 +261,7 @@ namespace CarLife.Infrastructure.Data.Migrations
                     b.Property<bool>("PhoneNumberConfirmed")
                         .HasColumnType("bit");
 
-                    b.Property<double>("Rating")
+                    b.Property<double?>("Rating")
                         .HasColumnType("float");
 
                     b.Property<string>("SecurityStamp")

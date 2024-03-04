@@ -17,14 +17,18 @@ public class Program
     builder.Services.AddStorage(builder.Configuration);
 
     builder.Services.AddIdentity<User, IdentityRole>()
-    .AddEntityFrameworkStores<CarLifeDbContext>();
+    .AddEntityFrameworkStores<CarLifeDbContext>()
+    .AddDefaultTokenProviders(); ;
     builder.Services.AddMemoryCache();
     builder.Services.AddSession();
     builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
            .AddCookie();
 
     var app = builder.Build();
-
+    //if (args.Length == 1 && args[0].ToLower() == "seeddata")
+    //{
+    //  await SeedingExtension.SeedRolesAsync(app);
+    //}
     // Configure the HTTP request pipeline.
     if (!app.Environment.IsDevelopment())
     {
@@ -43,7 +47,7 @@ public class Program
     app.MapControllerRoute(
         name: "default",
         pattern: "{controller=Home}/{action=Index}/{id?}");
-
+    //SeedingExtension.SeedRolesAsync(app).Wait();
     app.Run();
   }
 }

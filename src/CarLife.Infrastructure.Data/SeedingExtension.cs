@@ -4,21 +4,23 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;
 
 
 namespace CarLife.Infrastructure.Data;
 public static class SeedingExtension
 {
-  public static async Task DatabaseEnsureCreated(this IApplicationBuilder applicationBuilder)
+  public static async Task SeedRolesAsync(IApplicationBuilder applicationBuilder)
   {
-    using (var scope = applicationBuilder.ApplicationServices.CreateScope())
+    using (var serviceScope = applicationBuilder.ApplicationServices.CreateScope())
     {
-      var dbContext = scope.ServiceProvider.GetRequiredService<CarLifeDbContext>();
-      var database = dbContext.Database;
+      var roleManager = serviceScope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
 
-      await database.EnsureDeletedAsync();
-      await database.EnsureCreatedAsync();
+      if (!await roleManager.RoleExistsAsync(UserRoles.Admin))
+        await roleManager.CreateAsync(new IdentityRole(UserRoles.Admin));
+      if (!await roleManager.RoleExistsAsync(UserRoles.User))
+        await roleManager.CreateAsync(new IdentityRole(UserRoles.User));
     }
   }
 }
