@@ -30,7 +30,15 @@ public class CarController : Controller
     var carsMainDto = _mapper.Map<List<CarMainDto>>(cars);
     return View(carsMainDto);
   }
+  [HttpGet]
+  public IActionResult Details(int id)
+  {
+    var car = _context.Cars.FirstOrDefault(c => c.Id == id);
 
+    var carDetailDto = _mapper.Map<CarDetailDto>(car);
+
+    return View(carDetailDto);
+  }
 
   [HttpGet]
   public IActionResult Create()

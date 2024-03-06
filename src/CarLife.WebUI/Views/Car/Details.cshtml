@@ -1,0 +1,32 @@
+﻿@using CarLife.Application.Dto
+@model CarDetailDto
+
+<div class="container">
+    <h1 class="my-4">
+        @Model.Mark
+        <small>@Model.Model</small>
+    </h1>
+    <div class="row">
+        <div class="col-md-8">
+            @* <img class="img-fluid" src="@Model.Photo" alt=""> *@
+        </div>
+        <div class="col-md-4">
+            <h3 class="my-3">Car Description</h3>
+            <p>@Model.Description</p>
+            <h3 class="my-3">Project Details</h3>
+            <ul>
+                <li>Mark: @Model.Mark</li>
+                <li>Model: @Model.Model</li>
+                <li>Price: @Model.Price</li>
+                <li>Mileage: @Model.Mileage</li>
+                <li>YearOfManufecture: @Model.YearOfManufecture</li>
+                <li>City: @Model.City</li>
+                <li>Colour: @Model.Colour</li>
+            </ul>
+        </div>
+    </div>
+    @* <h3 class="my-4">Related Projects</h3>
+    <div class="row">
+        
+    </div> *@
+</div>

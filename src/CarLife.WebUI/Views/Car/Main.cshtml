@@ -29,7 +29,10 @@
                                 <p class="card-text">Price: @car.Price</p>
                                 <p class="card-text">Mileage: @car.Mileage</p>
                                 <p class="card-text">City: @car.City</p>
-                                <button type="button" class="btn btn-primary">Learn More</button>
+                                <a type="button" class="btn btn-primary" 
+                                        asp-controller="Car" asp-action="Details" asp-route-id="@car.Id">
+                                    Learn More
+                                    </a>
                             </div>
                         </div>
                     </div>
