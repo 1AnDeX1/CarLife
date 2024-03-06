@@ -10,6 +10,7 @@ public class User : IdentityUser
 {
   public double? Rating { get; set; }
 
+  public ICollection<Car>? Cars { get; set; }
   public ICollection<Purchase>? Purchases { get; set;}
   public ICollection<FavoriteCars>? FavoriteCars{ get; set; }
   public ICollection<ServiceStation>? ServiceStations { get; set; }

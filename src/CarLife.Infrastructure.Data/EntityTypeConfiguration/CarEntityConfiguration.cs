@@ -24,8 +24,8 @@ internal class CarEntityConfiguration : IEntityTypeConfiguration<Car>
     builder.Property(x => x.Mileage)
       .IsRequired();
 
-    builder.Property(x => x.Photo)
-      .IsRequired();
+    //builder.Property(x => x.Photo)
+    //  .IsRequired();
 
     builder.Property(x => x.YearOfManufecture)
       .IsRequired();

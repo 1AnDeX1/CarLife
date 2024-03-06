@@ -25,6 +25,11 @@ public class CarLifeDbContext : IdentityDbContext<User>
 
     base.OnModelCreating(modelBuilder);
 
+    modelBuilder.Entity<Car>()
+      .HasOne(x => x.User)
+      .WithMany(x => x.Cars)
+      .HasForeignKey(x => x.UserId);
+
     modelBuilder.Entity<FavoriteCars>()
       .HasOne(x => x.Car)
       .WithMany(x => x.Favorites)
