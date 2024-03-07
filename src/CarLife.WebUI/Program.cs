@@ -1,11 +1,10 @@
-﻿using Microsoft.EntityFrameworkCore;
-using CarLife.Infrastructure.Data;
+﻿using CarLife.Infrastructure.Data;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Identity;
 using CarLife.Core.Entities;
 using CarLife.Application;
-using AutoMapper;
-using Microsoft.Extensions.DependencyInjection;
+using CarLife.Application.Interfaces;
+using CarLife.Application.Services;
 
 
 namespace CarLife.WebUI;
@@ -20,6 +19,8 @@ public class Program
     builder.Services.AddControllersWithViews();
     builder.Services.AddAutoMapper(typeof(AutoMapperProfile));
     builder.Services.AddStorage(builder.Configuration);
+
+    builder.Services.AddScoped<ICarService, CarService>();
 
     builder.Services.AddIdentity<User, IdentityRole>()
     .AddEntityFrameworkStores<CarLifeDbContext>()

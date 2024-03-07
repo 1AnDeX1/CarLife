@@ -5,35 +5,37 @@ using CarLife.Infrastructure.Data;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using CarLife.Application.Interfaces;
+using CarLife.Application.Services;
 
 namespace CarLife.WebUI.Controllers;
 public class CarController : Controller
 {
   private readonly UserManager<User> _userManager;
-  private readonly CarLifeDbContext _context;
   private readonly IMapper _mapper;
+  private readonly ICarService _carService;
 
   public CarController(UserManager<User> userManager,
-            CarLifeDbContext context,
+            ICarService carService,
             IMapper mapper)
   {
-    _context = context;
     _userManager = userManager;
     _mapper = mapper;
+    _carService = carService;
   }
 
   [HttpGet]
   public IActionResult Main()
   {
 
-    var cars = _context.Cars.Include(c => c.User).ToList();
+    var cars = _carService.GetAll();
     var carsMainDto = _mapper.Map<List<CarMainDto>>(cars);
     return View(carsMainDto);
   }
   [HttpGet]
   public IActionResult Details(int id)
   {
-    var car = _context.Cars.FirstOrDefault(c => c.Id == id);
+    var car = _carService.GetById(id);
 
     var carDetailDto = _mapper.Map<CarDetailDto>(car);
 
@@ -68,10 +70,9 @@ public class CarController : Controller
       var newCar = _mapper.Map<Car>(carCreateDto);
       newCar.User = user;
 
-      _context.Cars.Add(newCar);
-      await _context.SaveChangesAsync();
-
-      var cars = _context.Cars.Include(c => c.User).ToList();
+      _carService.Add(newCar);
+      
+      var cars = _carService.GetAll();
       var carsMainDto = _mapper.Map<List<CarMainDto>>(cars);
       return View("Main", carsMainDto);
     }

@@ -6,7 +6,11 @@ using System.Threading.Tasks;
 using CarLife.Core.Entities;
 
 namespace CarLife.Application.Interfaces;
-internal interface ICarService
+public interface ICarService
 {
-  Task<IEnumerable<Car>> GetAll();
+  Task<IList<Car>> GetAll();
+  Task<Car?> GetById(int id);
+  bool Add(Car newCar);
+  bool Update(Car car);
+  bool Save();
 }

@@ -9,10 +9,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\CarLife.Core\CarLife.Core.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Services\" />
+    <ProjectReference Include="..\CarLife.Infrastructure.Data\CarLife.Infrastructure.Data.csproj" />
   </ItemGroup>
 
   <ItemGroup>
