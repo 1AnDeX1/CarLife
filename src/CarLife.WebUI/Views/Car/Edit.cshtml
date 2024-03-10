@@ -1,28 +1,17 @@
 ﻿﻿@using CarLife.Application.Dto
-@model CarCreateDto
-
-@{
-    ViewData["Title"] = "Sell Car ";
-}
+@model CarEditDto
 
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Sell Car</title>
+    <title>Edit Car</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
 <body>
     <div class="container mt-5">
-        <h1>Sell Car</h1>
-        @if (TempData["Error"] != null)
-        {
-            <div class="col-md-12 alert alert-danger">
-                <span><b>Sorry!</b> - @TempData["Error"] </span>
-            </div>
-        }
+        <h1>Edit Car</h1>
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-        <form method="post" asp-action="Create" style="margin-bottom: 50px;">
-            <input type="hidden" asp-for="UserId" />
+        <form method="post" asp-action="Edit" style="margin-bottom: 50px;">
             <div class="form-group">
                 <label asp-for="Mark" class="control-label"></label>
                 <input asp-for="Mark" class="form-control" placeholder="Mark" />
@@ -64,11 +53,11 @@
                 <span asp-validation-for="Colour" class="text-danger"></span>
             </div>
             <div class="form-group">
-              <label asp-for="Description" class="control-label"></label>
-              <textarea asp-for="Description" class="form-control" style="height: 150px;"></textarea>
-              <span asp-validation-for="Description" class="text-danger"></span>
+                <label asp-for="Description" class="control-label"></label>
+                <textarea asp-for="Description" class="form-control" style="height: 150px;"></textarea>
+                <span asp-validation-for="Description" class="text-danger"></span>
             </div>
-            <button type="submit" class="btn btn-primary">Create</button>
+            <button type="submit" class="btn btn-primary">Edit</button>
         </form>
     </div>
 </body>

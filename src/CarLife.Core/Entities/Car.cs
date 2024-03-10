@@ -16,7 +16,7 @@ public class Car
   public string? Description { get; set; }
   public int Mileage { get; set; }
   public string? Photo { get; set; }
-  public DateOnly YearOfManufecture { get; set; }
+  public int YearOfManufecture { get; set; }
   public string? City { get; set; }
   public string? Colour { get; set; } 
   public string? UserId { get; set; }

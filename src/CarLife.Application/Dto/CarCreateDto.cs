@@ -21,7 +21,7 @@ public class CarCreateDto
   [Required(ErrorMessage = "The photo is required.")]
   public string? Photo { get; set; }
   [Required(ErrorMessage = "The year of manufecture is required.")]
-  public DateOnly YearOfManufecture { get; set; }
+  public int YearOfManufecture { get; set; }
   [Required(ErrorMessage = "The city is required.")]
   public string? City { get; set; }
   [Required(ErrorMessage = "The colour is required.")] 

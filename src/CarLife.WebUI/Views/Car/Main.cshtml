@@ -1,4 +1,5 @@
 ﻿@using CarLife.Application.Dto
+@using CarLife.Application.Classes
 @model IEnumerable<CarMainDto>
 
 <!DOCTYPE html>
@@ -9,42 +10,145 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
 </head>
 <body>
-    <div class="container">
-        <h2 class="my-4">Car Catalog</h2>
-        <a type="button" class="btn btn-outline-secondary text-white bg-black w-25 nav-link" asp-area="" asp-controller="Car" asp-action="Create">
-            Sell Car
-        </a>
-        <div class="row">
-            
-            @if (Model != null)
-            {
-                @foreach (var car in Model)
-                {
-                    <div class="col-md-4">
-                        <div class="card mb-4 shadow-sm">
-                            <img src="@car.Photo" alt="@car.Mark @car.Model" class="card-img-top">
-                            <div class="card-body">
-                                <h5 class="card-title">@car.Mark @car.Model</h5>
-                                <p class="card-text">Year: @car.YearOfManufecture.Year</p>
-                                <p class="card-text">Price: @car.Price</p>
-                                <p class="card-text">Mileage: @car.Mileage</p>
-                                <p class="card-text">City: @car.City</p>
-                                <a type="button" class="btn btn-primary" 
-                                        asp-controller="Car" asp-action="Details" asp-route-id="@car.Id">
-                                    Learn More
-                                    </a>
-                            </div>
-                        </div>
+    <div class="main">
+        <div class="d-flex flex-column flex-shrink-0 p-3 text-white " style="width: 280px; background-color: rgb(108, 117, 125)">
+                <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
+                    <svg class="bi me-2" width="40" height="32"><use xlink:href="#bootstrap" /></svg>
+                    <span class="fs-4">Sidebar</span>
+                </a>
+                <hr>
+                <a type="button" class="btn btn-outline-secondary text-white nav-link" 
+                asp-area="" asp-controller="Car" asp-action="Create" style="border-color:white">
+                    Sell Car
+                </a>
+                <ul class="nav nav-pills flex-column mb-auto">
+                    <li class="form-group">
+                        <label for="sortSelect" class="mt-2">Sort by:</label>
+                        <select class="form-control mt-2" id="sortSelect">
+                            <option value="default" selected="@(ViewData["Sort"] as string == "default")">default</option>
+                            <option value="priceAsc" selected="@(ViewData["Sort"] as string == "priceAsc")">price by ascending</option>
+                            <option value="priceDesc" selected="@(ViewData["Sort"] as string == "priceDesc")">price by descending</option>
+                            <option value="dateAsc" selected="@(ViewData["Sort"] as string == "dateAsc")">year of manufacture by ascending</option>
+                            <option value="dateDesc" selected="@(ViewData["Sort"] as string == "dateDesc")">year of manufacture by descending</option>
+                        </select>
+                    </li>
+                <form asp-action="Main" id="filterForm" method="post">
+                    <div class="form-group">
+                        <label for="mark" class="mt-2">Search by mark</label>
+                        <input name="mark" class="form-control" placeholder="mark" value="@ViewData["Mark"]" />
                     </div>
-                }
-            }
-            else
-            {
-                <div class="col-md-4">
-                    <h1>No cars</h1>  
+                    <div class="form-group">
+                        <label for="model" class="mt-2">Search by model</label>
+                        <input name="model" class="form-control" placeholder="model" value="@ViewData["Model"]" />
+                    </div>
+                    <div class="form-group">
+                        <label class="mt-2">Price</label>
+                        <input name="priceFrom" type="number" class="form-control" placeholder="from" value="@ViewData["PriceFrom"]" />
+                        <input name="priceTo" type="number"  class="form-control" placeholder="to" value="@ViewData["PriceTo"]" />
+                    </div>
+                    <div class="form-group">
+                        <label class="mt-2">Mileage</label>
+                        <input name="mileageFrom" type="number" class="form-control" placeholder="from" value="@ViewData["MileageFrom"]" />
+                        <input name="mileageTo" type="number"  class="form-control" placeholder="to" value="@ViewData["MileageTo"]" />
+                    </div>
+                    <div class="form-group">
+                        <label class="mt-2">Year of manufacture</label>
+                        <input name="yearOfManufectureFrom" type="number" class="form-control" placeholder="from" value="@ViewData["YearOfManufectureFrom"]" />
+                        <input name="yearOfManufectureTo" type="number" class="form-control" placeholder="to" value="@ViewData["YearOfManufectureTo"]" />
+                    </div>
+                    <div class="form-group">
+                        <label for="city" class="mt-2">City</label>
+                        <input name="city" class="form-control" placeholder="city" value="@ViewData["City"]" />
+                    </div>
+                    <button type="submit" class="btn btn-primary">Search</button>
+                </form>
+                </ul>
+                <hr>
+                <div class="dropdown">
+                    <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
+                        <img src="https://github.com/mdo.png" alt="" width="32" height="32" class="rounded-circle me-2">
+                        <strong>mdo</strong>
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser1">
+                        <li><a class="dropdown-item" href="#">New project...</a></li>
+                        <li><a class="dropdown-item" href="#">Settings</a></li>
+                        <li><a class="dropdown-item" href="#">Profile</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" href="#">Sign out</a></li>
+                    </ul>
                 </div>
-            }
-        </div>
+            </div>
+        <div class="position-relative offset-md-3">
+                <h2 class="my-4">Car Catalog</h2>
+                
+                <div class="row">
+
+                    @if (Model != null)
+                    {
+                        if (Model.Any())
+                        {
+                            @foreach (var car in Model)
+                            {
+                                <div class="col-md-4">
+                                    <div class="card mb-4 shadow-sm">
+                                        <img src="@car.Photo" alt="@car.Mark @car.Model" class="card-img-top" style="height: 250px">
+                                        <div class="card-body">
+                                            <h5 class="card-title">@car.Mark @car.Model</h5>
+                                            <p class="card-text">Year: @car.YearOfManufecture</p>
+                                            <p class="card-text">Price: @car.Price</p>
+                                            <p class="card-text">Mileage: @car.Mileage</p>
+                                            <p class="card-text">City: @car.City</p>
+                                            <a type="button" class="btn btn-dark"
+                                               asp-controller="Car" asp-action="Details" asp-route-id="@car.Id">
+                                                Learn More
+                                            </a>
+                                            <a type="button" class="btn btn-secondary"
+                                               asp-controller="Car" asp-action="Edit" asp-route-id="@car.Id">
+                                                Edit
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        }
+                        else
+                        {
+                            <div class="col-md-4">
+                                <h1>No cars</h1>
+                            </div>
+                        }
+                    }
+                    else
+                    {
+                        <div class="col-md-4">
+                            <h1>No cars</h1>
+                        </div>
+                    }
+                </div>
+            </div>
+        
     </div>
+    
 </body>
 </html>
+<style>
+    .offset-md-3 {
+        min-width: 1400px;
+    }
+    .container{
+        margin: 0;
+        padding:0;
+    }
+    .main{
+        display:flex;
+    }
+
+</style>
+<script>
+    document.getElementById("sortSelect").addEventListener("change", function () {
+        var selectedSortOption = this.value;
+        window.location.href = "/Car/Main?sort=" + selectedSortOption;
+    });
+
+
+</script>

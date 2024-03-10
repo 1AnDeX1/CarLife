@@ -4,6 +4,7 @@ using CarLife.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CarLife.Infrastructure.Data.Migrations
 {
     [DbContext(typeof(CarLifeDbContext))]
-    partial class CarLifeDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240310173146_CarDeleteDate")]
+    partial class CarDeleteDate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -64,9 +67,6 @@ namespace CarLife.Infrastructure.Data.Migrations
 
                     b.Property<string>("UserId")
                         .HasColumnType("nvarchar(450)");
-
-                    b.Property<int>("YearOfManufecture")
-                        .HasColumnType("int");
 
                     b.HasKey("Id");
 

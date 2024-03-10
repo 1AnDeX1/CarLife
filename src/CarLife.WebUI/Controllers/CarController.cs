@@ -1,12 +1,10 @@
 ﻿using AutoMapper;
 using CarLife.Application.Dto;
 using CarLife.Core.Entities;
-using CarLife.Infrastructure.Data;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using CarLife.Application.Interfaces;
-using CarLife.Application.Services;
+using CarLife.Application.Classes;
 
 namespace CarLife.WebUI.Controllers;
 public class CarController : Controller
@@ -25,11 +23,35 @@ public class CarController : Controller
   }
 
   [HttpGet]
-  public IActionResult Main()
+  public IActionResult Main(string sort)
   {
-
-    var cars = _carService.GetAll();
+    
+    var cars = _carService.GetSortedCars(sort);
     var carsMainDto = _mapper.Map<List<CarMainDto>>(cars);
+
+    ViewData["Sort"] = sort ?? "default";
+
+    return View(carsMainDto);
+  }
+  [HttpPost]
+  public IActionResult Main(CarSortItems carSortItems)
+  {
+    if (!ModelState.IsValid) 
+      return View(carSortItems);
+
+    ViewData["Mark"] = carSortItems.Mark;
+    ViewData["Model"] = carSortItems.Model;
+    ViewData["PriceFrom"] = carSortItems.PriceFrom;
+    ViewData["PriceTo"] = carSortItems.PriceTo;
+    ViewData["MileageFrom"] = carSortItems.MileageFrom;
+    ViewData["MileageTo"] = carSortItems.MileageTo;
+    ViewData["YearOfManufectureFrom"] = carSortItems.YearOfManufectureFrom;
+    ViewData["YearOfManufectureTo"] = carSortItems.YearOfManufectureTo;
+    ViewData["City"] = carSortItems.City;
+
+    var cars = _carService.GetFilteredCars(carSortItems);
+    var carsMainDto = _mapper.Map<List<CarMainDto>>(cars);
+
     return View(carsMainDto);
   }
   [HttpGet]
@@ -41,7 +63,28 @@ public class CarController : Controller
 
     return View(carDetailDto);
   }
+  [HttpGet]
+  public IActionResult Edit(int id)
+  {
+    var car = _carService.GetById(id);
+    var carDetailDto = _mapper.Map<CarEditDto>(car);
 
+    return View(carDetailDto);
+  }
+
+  [HttpPost]
+  public IActionResult Edit(CarEditDto carEditDto)
+  {
+    if (!ModelState.IsValid) return View(carEditDto);
+    var newCar = _mapper.Map<Car>(carEditDto);
+
+    _carService.Update(newCar);
+
+
+    var cars = _carService.GetAll();
+    var carsMainDto = _mapper.Map<List<CarMainDto>>(cars);
+    return View("Main", carsMainDto);
+  }
   [HttpGet]
   public IActionResult Create()
   {
@@ -56,7 +99,7 @@ public class CarController : Controller
     if (carCreateDto.UserId == null)
     {
 
-      ModelState.AddModelError("User", "You Must be autorised");
+      TempData["Error"] = "You Must be authorised";
       return View(carCreateDto);
     }
     else
@@ -64,7 +107,7 @@ public class CarController : Controller
       var user = await _userManager.FindByIdAsync(carCreateDto.UserId);
       if (user == null)
       {
-        ModelState.AddModelError("UserId", "The user was not found.");
+        TempData["Error"] = "The user was not found.";
         return View(carCreateDto);
       }
       var newCar = _mapper.Map<Car>(carCreateDto);
