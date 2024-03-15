@@ -1,0 +1,20 @@
+﻿@using CarLife.Application.Dto
+@model NewsDetailsDto
+
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <h1 class="my-4">@Model.Title</h1>
+            <p><strong>Author:</strong> @Model.Author</p>
+            <p><strong>Date Posted:</strong> @Model.DateOfPost.ToShortDateString()</p>
+            <p><strong>Theme:</strong> @Model.NewsTheme?.Name</p>
+            @if (!string.IsNullOrEmpty(Model.Photo))
+            {
+                <img src="@Model.Photo" class="img-fluid mb-4" alt="@Model.Title">
+            }
+            <p>@Model.Text</p>
+        </div>
+    </div>
+</div>

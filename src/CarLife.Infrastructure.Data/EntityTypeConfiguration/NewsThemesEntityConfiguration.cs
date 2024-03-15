@@ -8,20 +8,10 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace CarLife.Infrastructure.Data.EntityTypeConfiguration;
-internal class NewsEntityConfiguration : IEntityTypeConfiguration<News>
+public class NewsThemesEntityConfiguration : IEntityTypeConfiguration<NewsThemes>
 {
-  public void Configure(EntityTypeBuilder<News> builder)
+  public void Configure(EntityTypeBuilder<NewsThemes> builder)
   {
     builder.HasKey(x => x.Id);
-
-    builder.Property(x => x.Title)
-      .IsRequired()
-      .HasMaxLength(70);
-
-    builder.Property(x => x.Description)
-      .IsRequired();
-
-    builder.Property(x => x.Text)
-      .IsRequired();
   }
 }

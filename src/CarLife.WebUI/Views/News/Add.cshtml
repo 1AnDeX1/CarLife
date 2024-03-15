@@ -1,0 +1,64 @@
+﻿@using CarLife.Application.Dto
+@model NewsCreateDto
+
+@{
+    ViewData["Title"] = "Add News";
+}
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0-alpha1/css/bootstrap.min.css" integrity="sha512-x+b9RvZStNOZ/z6XZ5byJK7Xq/YFeqT1PtdE+3Uf/jaMJbwjByyN36akL6/Xe5vZ5xQj5aY6kD6olinesrD/YsEw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+<form asp-action="Add">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 offset-md-3">
+                <h1 class="text-center mb-4">Add News</h1>
+                <div asp-validation-summary=ModelOnly class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for=Title class="form-label"></label>
+                    <input asp-for=Title class="form-control" />
+                    <span asp-validation-for=Title class="text-danger"></span>
+               </div>
+                <div class="form-group">
+                    <label asp-for=Description class="form-label"></label>
+                    <input asp-for=Description class="form-control" />
+                    <span asp-validation-for=Description class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for=Author class="form-label"></label>
+                    <input asp-for=Author class="form-control" />
+                    <span asp-validation-for=Author class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for=Photo class="form-label"></label>
+                    <input asp-for=Photo class="form-control" />
+                    <span asp-validation-for=Photo class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="ThemeId" class="form-label"></label>
+                    <select asp-for="ThemeId" class="form-control">
+                        <option value="">Select a theme</option>
+                        @if (Model.NewsThemes != null)
+                        {
+                            foreach (var theme in Model.NewsThemes)
+                            {
+                                <option value="@theme.Id">@theme.Name</option>
+                            }
+                        }
+                    </select>
+                    <span asp-validation-for="ThemeId" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for=Text class="form-label"></label>
+                    <textarea asp-for=Text class="form-control"></textarea>
+                    <span asp-validation-for=Text class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for=DateOfPost class="form-label"></label>
+                    <input asp-for=DateOfPost class="form-control" />
+                    <span asp-validation-for=DateOfPost class="text-danger"></span>
+                </div>
+                <button type="submit" class="btn btn-primary">Add</button>
+            </div>
+        </div>
+    </div>
+</form>

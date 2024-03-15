@@ -5,6 +5,7 @@ using CarLife.Core.Entities;
 using CarLife.Application;
 using CarLife.Application.Interfaces;
 using CarLife.Application.Services;
+using CarLife.Application.IServices;
 
 
 namespace CarLife.WebUI;
@@ -21,6 +22,7 @@ public class Program
     builder.Services.AddStorage(builder.Configuration);
 
     builder.Services.AddScoped<ICarService, CarService>();
+    builder.Services.AddScoped<INewsService, NewsService>();
 
     builder.Services.AddIdentity<User, IdentityRole>()
     .AddEntityFrameworkStores<CarLifeDbContext>()

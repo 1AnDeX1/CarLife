@@ -18,6 +18,7 @@ public class CarLifeDbContext : IdentityDbContext<User>
   public DbSet<PageAttending> PageAttending { get; set; }
   public DbSet<Purchase> Purchases { get; set; }
   public DbSet<ServiceStation> ServiceStations { get; set; }
+  public DbSet<NewsThemes> NewsThemes  { get; set; }
 
   protected override void OnModelCreating(ModelBuilder modelBuilder)
   {
@@ -29,6 +30,11 @@ public class CarLifeDbContext : IdentityDbContext<User>
       .HasOne(x => x.User)
       .WithMany(x => x.Cars)
       .HasForeignKey(x => x.UserId);
+
+    modelBuilder.Entity<News>()
+      .HasOne(x => x.NewsTheme)
+      .WithMany(x => x.News)
+      .HasForeignKey(x => x.ThemeId);
 
     modelBuilder.Entity<FavoriteCars>()
       .HasOne(x => x.Car)

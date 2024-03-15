@@ -19,5 +19,10 @@ public class AutoMapperProfile : Profile
     CreateMap<Car, CarDetailDto>();
     CreateMap<Car, CarEditDto>();
     CreateMap<CarEditDto, Car>();
+    CreateMap<News, NewsCreateDto>();
+    CreateMap<NewsCreateDto, News>();
+    CreateMap<News, NewsIndexDto>();
+    CreateMap<NewsIndexDto, News>();
+    CreateMap<News, NewsDetailsDto>();
   }
 }

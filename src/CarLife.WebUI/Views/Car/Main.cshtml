@@ -28,8 +28,8 @@
                             <option value="default" selected="@(ViewData["Sort"] as string == "default")">default</option>
                             <option value="priceAsc" selected="@(ViewData["Sort"] as string == "priceAsc")">price by ascending</option>
                             <option value="priceDesc" selected="@(ViewData["Sort"] as string == "priceDesc")">price by descending</option>
-                            <option value="dateAsc" selected="@(ViewData["Sort"] as string == "dateAsc")">year of manufacture by ascending</option>
-                            <option value="dateDesc" selected="@(ViewData["Sort"] as string == "dateDesc")">year of manufacture by descending</option>
+                            <option value="dateAsc" selected="@(ViewData["Sort"] as string == "dateAsc")">year by ascending</option>
+                            <option value="dateDesc" selected="@(ViewData["Sort"] as string == "dateDesc")">year by descending</option>
                         </select>
                     </li>
                 <form asp-action="Main" id="filterForm" method="post">
@@ -60,7 +60,7 @@
                         <label for="city" class="mt-2">City</label>
                         <input name="city" class="form-control" placeholder="city" value="@ViewData["City"]" />
                     </div>
-                    <button type="submit" class="btn btn-primary">Search</button>
+                    <button type="submit" class="btn  btn-outline-secondary text-white w-100" style="border-color:white">Search</button>
                 </form>
                 </ul>
                 <hr>

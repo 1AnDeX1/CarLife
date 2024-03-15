@@ -1,0 +1,81 @@
+﻿@using CarLife.Application.Dto
+@model IEnumerable<NewsIndexDto>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>News</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+</head>
+<body>
+    <div class="container">
+        <h1 class="my-4">News</h1>
+        <a type="button" class="btn btn-outline-secondary text-white bg-dark nav-link w-25"
+           asp-area="" asp-controller="News" asp-action="Add" style="border-color:white">
+            Add news
+        </a>
+        @if (Model.Any())
+        {
+            @foreach (var article in Model)
+            {
+                <div class="container news-container">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <img src="@article.Photo" class="img-fluid news-image">
+                        </div>
+                        <div class="col-md-8 news-content">
+                            <h2>@article.Title</h2>
+                            <h3>@article.NewsTheme?.Name</h3>
+                            <p>@article.Description</p>
+                            <p>Posted on: @article.DateOfPost.ToString("dd MMM yyyy")</p>
+                            <a type="button" class="btn btn-dark"
+                                asp-controller="News" asp-action="Details" asp-route-id="@article.Id">
+                                Read More
+                            </a>
+                            <a type="button" class="btn btn-danger"
+                               asp-controller="News" asp-action="Delete" asp-route-id="@article.Id">
+                                Delete
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            }   
+        }
+        else
+        {
+            <p>No news articles found.</p>
+        }
+    </div>
+</body>
+</html>
+<style>
+    .news-container {
+        margin-top: 50px;
+        margin-bottom: 50px;
+    }
+
+    .news-image {
+        width: 100%;
+        height: auto;
+    }
+
+    .news-content {
+        padding-left: 50px;
+    }
+
+    h2 {
+        font-size: 2.5em;
+        margin-bottom: 20px;
+    }
+
+    h3 {
+        font-size: 1.5em;
+        margin-bottom: 20px;
+    }
+
+    p {
+        font-size: 1.1em;
+        margin-bottom: 20px;
+    }
+</style>

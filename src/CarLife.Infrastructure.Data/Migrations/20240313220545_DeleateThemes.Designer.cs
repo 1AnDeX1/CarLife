@@ -4,6 +4,7 @@ using CarLife.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CarLife.Infrastructure.Data.Migrations
 {
     [DbContext(typeof(CarLifeDbContext))]
-    partial class CarLifeDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240313220545_DeleateThemes")]
+    partial class DeleateThemes
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -124,8 +127,8 @@ namespace CarLife.Infrastructure.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("ThemeId")
-                        .HasColumnType("int");
+                    b.Property<string>("ThemeId")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Title")
                         .IsRequired()
@@ -134,25 +137,7 @@ namespace CarLife.Infrastructure.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ThemeId");
-
                     b.ToTable("News");
-                });
-
-            modelBuilder.Entity("CarLife.Core.Entities.NewsThemes", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("NewsThemes");
                 });
 
             modelBuilder.Entity("CarLife.Core.Entities.PageAttending", b =>
@@ -462,15 +447,6 @@ namespace CarLife.Infrastructure.Data.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("CarLife.Core.Entities.News", b =>
-                {
-                    b.HasOne("CarLife.Core.Entities.NewsThemes", "NewsTheme")
-                        .WithMany("News")
-                        .HasForeignKey("ThemeId");
-
-                    b.Navigation("NewsTheme");
-                });
-
             modelBuilder.Entity("CarLife.Core.Entities.PageAttending", b =>
                 {
                     b.HasOne("CarLife.Core.Entities.Car", "Car")
@@ -566,11 +542,6 @@ namespace CarLife.Infrastructure.Data.Migrations
                     b.Navigation("PageAttendings");
 
                     b.Navigation("Purchases");
-                });
-
-            modelBuilder.Entity("CarLife.Core.Entities.NewsThemes", b =>
-                {
-                    b.Navigation("News");
                 });
 
             modelBuilder.Entity("CarLife.Core.Entities.User", b =>
