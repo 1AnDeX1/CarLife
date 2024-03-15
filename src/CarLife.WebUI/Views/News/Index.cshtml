@@ -1,5 +1,14 @@
 ﻿@using CarLife.Application.Dto
+@using CarLife.Core.Entities
+@using Microsoft.AspNetCore.Identity
 @model IEnumerable<NewsIndexDto>
+
+@inject SignInManager<User> SignInManager
+@inject UserManager<User> UserManager
+
+@{
+    bool isAuthenticated = User.Identity?.IsAuthenticated == true;
+}
 
 <!DOCTYPE html>
 <html>
@@ -15,7 +24,22 @@
            asp-area="" asp-controller="News" asp-action="Add" style="border-color:white">
             Add news
         </a>
-        @if (Model.Any())
+        <div class="form-group">
+            <label for="sortSelect" class="mt-2">Sort by:</label>
+            <select class="form-control mt-2" id="sortSelect">
+                <option value="0">Select a theme</option>
+                @if (Model != null)
+                {
+                    var themes = Model.Select(x => x.NewsTheme).Distinct().ToList();
+                    foreach (var theme in themes)
+                    {
+                        <option value="@theme?.Id">@theme?.Name</option>
+                    }
+                }
+            </select>
+        </div>
+
+        @if (Model != null)
         {
             @foreach (var article in Model)
             {
@@ -33,10 +57,13 @@
                                 asp-controller="News" asp-action="Details" asp-route-id="@article.Id">
                                 Read More
                             </a>
-                            <a type="button" class="btn btn-danger"
-                               asp-controller="News" asp-action="Delete" asp-route-id="@article.Id">
-                                Delete
-                            </a>
+                            @if (isAuthenticated && User.IsInRole("admin"))
+                            {
+                                <a type="button" class="btn btn-danger"
+                                asp-controller="News" asp-action="Delete" asp-route-id="@article.Id">
+                                    Delete
+                                </a>
+                            }
                         </div>
                     </div>
                 </div>
@@ -79,3 +106,13 @@
         margin-bottom: 20px;
     }
 </style>
+<script>
+    document.getElementById('sortSelect').addEventListener('change', function () {
+        var filter = this.value;
+        if (filter != 0) {
+            window.location.href = '@Url.Action("Index", "News")?filter=' + filter;
+        } else {
+            window.location.href = '@Url.Action("Index", "News")';
+        }
+    });
+</script>

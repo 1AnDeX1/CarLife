@@ -45,6 +45,16 @@ public class NewsService : INewsService
     return _context.News.Include(x => x.NewsTheme).ToList();
   }
 
+  public IList<News> GetFilteredNews(int filter)
+  {
+    if (filter == 0)
+      return GetAllWithThemes();
+
+    return _context.News.Include(x => x.NewsTheme)
+      .Where(t => t.NewsTheme != null && t.NewsTheme.Id == filter)
+      .ToList();
+  }
+
   public News? GetById(int id)
   {
     return _context.News.Include(x => x.NewsTheme).FirstOrDefault(n => n.Id == id);

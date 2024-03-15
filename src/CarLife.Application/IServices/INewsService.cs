@@ -10,6 +10,7 @@ public interface INewsService
 {
   IList<News> GetAll();
   IList<News> GetAllWithThemes();
+  IList<News> GetFilteredNews(int filter);
   List<NewsThemes> GetAllThemes();
   News? GetById(int id);
   News? GetByIdWithTheme(int id); 

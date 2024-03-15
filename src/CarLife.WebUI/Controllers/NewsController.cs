@@ -17,10 +17,13 @@ public class NewsController : Controller
     _mapper = mapper;
   }
   [HttpGet]
-  public IActionResult Index()
+  public IActionResult Index(int filter)
   {
-    var news = _newsService.GetAllWithThemes();
+
+    var news = _newsService.GetFilteredNews(filter);
     var newsIndexDto = _mapper.Map<List<NewsIndexDto>>(news);
+
+    //ViewData["Filter"] = filter;
 
     return View(newsIndexDto);
   }

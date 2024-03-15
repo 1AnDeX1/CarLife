@@ -25,7 +25,6 @@ public class CarController : Controller
   [HttpGet]
   public IActionResult Main(string sort)
   {
-    
     var cars = _carService.GetSortedCars(sort);
     var carsMainDto = _mapper.Map<List<CarMainDto>>(cars);
 
