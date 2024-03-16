@@ -1,14 +1,7 @@
-﻿@using CarLife.Application.Dto
+﻿@using CarLife.Application.Dto.News
 @using CarLife.Core.Entities
 @using Microsoft.AspNetCore.Identity
-@model IEnumerable<NewsIndexDto>
-
-@inject SignInManager<User> SignInManager
-@inject UserManager<User> UserManager
-
-@{
-    bool isAuthenticated = User.Identity?.IsAuthenticated == true;
-}
+@model NewsFilterIndexDto
 
 <!DOCTYPE html>
 <html>
@@ -28,20 +21,19 @@
             <label for="sortSelect" class="mt-2">Sort by:</label>
             <select class="form-control mt-2" id="sortSelect">
                 <option value="0">Select a theme</option>
-                @if (Model != null)
+                @if (Model.Themes != null)
                 {
-                    var themes = Model.Select(x => x.NewsTheme).Distinct().ToList();
-                    foreach (var theme in themes)
-                    {
+                    foreach (var theme in Model.Themes)
+                        {
                         <option value="@theme?.Id">@theme?.Name</option>
                     }
                 }
             </select>
         </div>
 
-        @if (Model != null)
+        @if (Model.News != null)
         {
-            @foreach (var article in Model)
+            @foreach (var article in Model.News)
             {
                 <div class="container news-container">
                     <div class="row">
@@ -57,7 +49,7 @@
                                 asp-controller="News" asp-action="Details" asp-route-id="@article.Id">
                                 Read More
                             </a>
-                            @if (isAuthenticated && User.IsInRole("admin"))
+                            @if (User.Identity != null && User.Identity.IsAuthenticated && User.IsInRole("admin"))
                             {
                                 <a type="button" class="btn btn-danger"
                                 asp-controller="News" asp-action="Delete" asp-route-id="@article.Id">

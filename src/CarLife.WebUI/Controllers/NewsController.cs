@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using CarLife.Application.Dto;
+using CarLife.Application.Dto.News;
 using CarLife.Application.IServices;
 using CarLife.Core.Entities;
 using CarLife.Infrastructure.Data;
@@ -19,13 +19,17 @@ public class NewsController : Controller
   [HttpGet]
   public IActionResult Index(int filter)
   {
-
     var news = _newsService.GetFilteredNews(filter);
+    var themes = _newsService.GetAllThemes();
     var newsIndexDto = _mapper.Map<List<NewsIndexDto>>(news);
 
-    //ViewData["Filter"] = filter;
+    var newsFilterIndexDto = new NewsFilterIndexDto
+    {
+      News = newsIndexDto,
+      Themes = themes
+    };
 
-    return View(newsIndexDto);
+    return View(newsFilterIndexDto);
   }
 
   [HttpGet]

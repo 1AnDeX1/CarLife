@@ -4,11 +4,11 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using CarLife.Core.Entities;
 
-namespace CarLife.Application.Dto;
-public class CarEditDto
+namespace CarLife.Application.Dto.Car;
+public class CarCreateDto
 {
-  public int Id { get; set; }
   [Required(ErrorMessage = "The mark is required.")]
   public string? Mark { get; set; }
   [Required(ErrorMessage = "The model is required.")]
@@ -26,4 +26,6 @@ public class CarEditDto
   public string? City { get; set; }
   [Required(ErrorMessage = "The colour is required.")]
   public string? Colour { get; set; }
+  public string? UserId { get; set; }
+  public User? User { get; set; }
 }

@@ -5,10 +5,10 @@ using System.Text;
 using System.Threading.Tasks;
 using CarLife.Core.Entities;
 
-namespace CarLife.Application.Dto;
+namespace CarLife.Application.Dto.News;
 public class NewsIndexDto
 {
-  
+
   public int Id { get; set; }
   public string? Title { get; set; }
   public string? Description { get; set; }
@@ -17,5 +17,4 @@ public class NewsIndexDto
   public DateOnly DateOfPost { get; set; }
 
   public NewsThemes? NewsTheme { get; set; }
-  public IEnumerable<NewsThemes>? Themes { get; set; }
 }

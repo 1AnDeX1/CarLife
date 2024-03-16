@@ -4,7 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
-using CarLife.Application.Dto;
+using CarLife.Application.Dto.Car;
+using CarLife.Application.Dto.News;
 using CarLife.Core.Entities;
 
 namespace CarLife.Application;
@@ -24,5 +25,7 @@ public class AutoMapperProfile : Profile
     CreateMap<News, NewsIndexDto>();
     CreateMap<NewsIndexDto, News>();
     CreateMap<News, NewsDetailsDto>();
+    CreateMap<News, NewsFilterIndexDto>();
+    CreateMap<NewsFilterIndexDto, News>();
   }
 }

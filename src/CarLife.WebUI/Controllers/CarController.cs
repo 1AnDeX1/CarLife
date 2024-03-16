@@ -1,10 +1,10 @@
 ﻿using AutoMapper;
-using CarLife.Application.Dto;
 using CarLife.Core.Entities;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using CarLife.Application.Interfaces;
 using CarLife.Application.Classes;
+using CarLife.Application.Dto.Car;
 
 namespace CarLife.WebUI.Controllers;
 public class CarController : Controller

@@ -5,9 +5,10 @@ using System.Text;
 using System.Threading.Tasks;
 using CarLife.Core.Entities;
 
-namespace CarLife.Application.Dto;
-public class NewsCreateDto
+namespace CarLife.Application.Dto.News;
+public class NewsDetailsDto
 {
+  public int Id { get; set; }
   public string? Title { get; set; }
   public string? Description { get; set; }
   public string? Author { get; set; }
@@ -17,5 +18,4 @@ public class NewsCreateDto
   public DateOnly DateOfPost { get; set; }
 
   public NewsThemes? NewsTheme { get; set; }
-  public List<NewsThemes>? NewsThemes { get; set; }
 }

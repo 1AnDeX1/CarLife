@@ -1,4 +1,4 @@
-﻿@using CarLife.Application.Dto
+﻿@using CarLife.Application.Dto.Car
 @using CarLife.Application.Classes
 @model IEnumerable<CarMainDto>
 
@@ -102,10 +102,13 @@
                                                asp-controller="Car" asp-action="Details" asp-route-id="@car.Id">
                                                 Learn More
                                             </a>
-                                            <a type="button" class="btn btn-secondary"
-                                               asp-controller="Car" asp-action="Edit" asp-route-id="@car.Id">
-                                                Edit
-                                            </a>
+                                            @if (User.Identity != null && User.Identity.IsAuthenticated && User.IsInRole("admin"))
+                                            {
+                                                <a type="button" class="btn btn-secondary"
+                                                   asp-controller="Car" asp-action="Edit" asp-route-id="@car.Id">
+                                                    Edit
+                                                </a>
+                                            }
                                         </div>
                                     </div>
                                 </div>
