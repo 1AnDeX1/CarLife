@@ -17,5 +17,6 @@ public interface ICarService
   Car? GetById(int id);
   bool Add(Car newCar);
   bool Update(Car car);
+  bool Delete(Car car);
   bool Save();
 }

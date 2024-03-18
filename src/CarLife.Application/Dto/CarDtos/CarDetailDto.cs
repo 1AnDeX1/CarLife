@@ -17,4 +17,5 @@ public class CarDetailDto
   public int YearOfManufecture { get; set; }
   public string? City { get; set; }
   public string? Colour { get; set; }
+  public bool IsFavorite { get; set; }
 }

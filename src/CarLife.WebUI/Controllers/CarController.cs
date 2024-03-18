@@ -5,6 +5,9 @@ using Microsoft.AspNetCore.Mvc;
 using CarLife.Application.Interfaces;
 using CarLife.Application.Classes;
 using CarLife.Application.Dto.Car;
+using Microsoft.EntityFrameworkCore;
+using CarLife.Application.Dto;
+using CarLife.Application.IServices;
 
 namespace CarLife.WebUI.Controllers;
 public class CarController : Controller
@@ -12,14 +15,17 @@ public class CarController : Controller
   private readonly UserManager<User> _userManager;
   private readonly IMapper _mapper;
   private readonly ICarService _carService;
+  private readonly IFavoriteCarsService _favoriteCarsService;
 
   public CarController(UserManager<User> userManager,
             ICarService carService,
+            IFavoriteCarsService favoriteCarsService,
             IMapper mapper)
   {
     _userManager = userManager;
     _mapper = mapper;
     _carService = carService;
+    _favoriteCarsService = favoriteCarsService;
   }
 
   [HttpGet]
@@ -57,8 +63,17 @@ public class CarController : Controller
   public IActionResult Details(int id)
   {
     var car = _carService.GetById(id);
-
     var carDetailDto = _mapper.Map<CarDetailDto>(car);
+
+    var favorite = _favoriteCarsService.GetFavoriteCar(id);
+    if (favorite != null)
+    {
+      carDetailDto.IsFavorite = true;
+    }
+    else
+    {
+      carDetailDto.IsFavorite = false;
+    }
 
     return View(carDetailDto);
   }
@@ -118,6 +133,55 @@ public class CarController : Controller
       var carsMainDto = _mapper.Map<List<CarMainDto>>(cars);
       return View("Main", carsMainDto);
     }
+  }
+
+  [HttpPost]
+  public IActionResult AddToFavorite(int id)
+  {
+
+    var curUserId = _userManager.GetUserId(User);
+
+    if (User.Identity != null && !User.Identity.IsAuthenticated)
+    {
+      TempData["Status"] = "You Must be authorised";
+      return RedirectToAction("Details", "Car", new { id });
+    }
+
+    var favorite = _favoriteCarsService.GetFavoriteCar(id);
+
+    if (favorite == null)
+    {
+      favorite = new FavoriteCars
+      {
+        UserId = curUserId,
+        CarId = id
+      };
+      var added = _favoriteCarsService.AddToFavorite(favorite);
+
+      if (!added)
+      {
+        TempData["Status"] = "Failed";
+        return RedirectToAction("Details", "Car", new { id });
+      }
+    }
+    else
+    {
+      _favoriteCarsService.Delete(favorite);
+    }
+    return RedirectToAction("Details", "Car", new { id });
+  }
+
+  [HttpPost]
+  public IActionResult Delete(int id)
+  {
+    var car = _carService.GetById(id);
+
+    if (car != null)
+    {
+        _carService.Delete(car);
+    }
+
+    return RedirectToAction("Main", "Car");
   }
 
   

@@ -6,8 +6,10 @@ using System.Threading.Tasks;
 using CarLife.Core.Entities;
 
 namespace CarLife.Application.IServices;
-public interface IUserService
+public interface IFavoriteCarsService
 {
-  List<Car> GetAllUserCars();
-  List<Car?> GetAllUserFavoriteCars();
+  FavoriteCars? GetFavoriteCar(int id);
+  bool AddToFavorite(FavoriteCars car);
+  bool Delete(FavoriteCars car);
+  bool Save();
 }

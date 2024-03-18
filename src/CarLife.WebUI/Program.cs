@@ -23,6 +23,8 @@ public class Program
 
     builder.Services.AddScoped<ICarService, CarService>();
     builder.Services.AddScoped<INewsService, NewsService>();
+    builder.Services.AddScoped<IUserService, UserService>();
+    builder.Services.AddScoped<IFavoriteCarsService, FavoriteCarsService>();
 
     builder.Services.AddIdentity<User, IdentityRole>()
     .AddEntityFrameworkStores<CarLifeDbContext>()

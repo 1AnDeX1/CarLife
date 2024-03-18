@@ -1,0 +1,132 @@
+﻿@using CarLife.Application.Dto.Profile
+
+@model ProfileDto
+
+<h1 class="display-4 fw-normal">User Dashboard</h1>
+
+<div class="album py-5 bg-light">
+    <div class="container">
+        <h2 class="display-4 fw-normal">Your cars</h2>
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+            @if (Model.Cars != null)
+            {
+                @foreach (var car in Model.Cars)
+                {
+                    <div class="col-md-4">
+                        <div class="card mb-4 shadow-sm">
+                            <img src="@car.Photo" alt="@car.Mark @car.Model" class="card-img-top" style="height: 250px">
+                            <div class="card-body">
+                                <h5 class="card-title">@car.Mark @car.Model</h5>
+                                <p class="card-text">Year: @car.YearOfManufecture</p>
+                                <p class="card-text">Price: @car.Price</p>
+                                <p class="card-text">Mileage: @car.Mileage</p>
+                                <p class="card-text">City: @car.City</p>
+                                <a type="button" class="btn btn-dark"
+                                    asp-controller="Car" asp-action="Details" asp-route-id="@car.Id">
+                                    Learn More
+                                </a>
+                                <a type="button" class="btn btn-secondary"
+                                    asp-controller="Car" asp-action="Edit" asp-route-id="@car.Id">
+                                    Edit
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                }
+                @* @foreach (var item in Model)
+                {
+                    <div class="col-md-4">
+                        <div class="card mb-4 box-shadow">
+                            <img class="card-img-top" src="@item.Photo" width="100%" height="225" alt="Card image cap">
+                            <div class="card-body">
+                                <p class="card-text">@item.Mark</p>
+                                <p class="card-text">@item.Model</p>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="btn-group">
+                                        <a type="btn btn-success" asp-controller="Club" asp-action="Detail" asp-route-id="@item.Id"
+                                           class="btn btn-sm btn-outline-secondary">View</a>
+                                        <a asp-controller="" asp-action="Edit" asp-route-id="@item.Id" class="btn btn-sm btn-outline-secondary">Edit</a>
+                                        <a asp-controller="" asp-action="Delete" asp-route-id="@item.Id" class="btn btn-sm btn-outline-secondary">Delete</a>
+                                    </div>
+                                    <small class="text-muted">@item.Mileage</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                } *@
+            }
+            else
+            {
+                <div class="col-md-4">
+                    <h1>No cars</h1>
+                </div>
+            }
+            
+        </div>
+        <h2 class="display-4 fw-normal">Your favorite cars</h2>
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+            @if (Model.FavoriteCars != null)
+            {
+                @foreach (var car in Model.FavoriteCars)
+                {
+                    if (car != null)
+                    {
+                        <div class="col-md-4">
+                            <div class="card mb-4 shadow-sm">
+                                <img src="@car.Photo" alt="@car.Mark @car.Model" class="card-img-top" style="height: 250px">
+                                <div class="card-body">
+                                    <h5 class="card-title">@car.Mark @car.Model</h5>
+                                    <p class="card-text">Year: @car.YearOfManufecture</p>
+                                    <p class="card-text">Price: @car.Price</p>
+                                    <p class="card-text">Mileage: @car.Mileage</p>
+                                    <p class="card-text">City: @car.City</p>
+                                    <a type="button" class="btn btn-dark"
+                                       asp-controller="Car" asp-action="Details" asp-route-id="@car.Id">
+                                        Learn More
+                                    </a>
+                                    <a type="button" class="btn btn-secondary"
+                                       asp-controller="Car" asp-action="Edit" asp-route-id="@car.Id">
+                                        Edit
+                                    </a>
+                                    <form asp-controller="Profile" asp-action="DeleteFromFavorite" asp-route-id="@car.Id" method="post">
+                                        <button type="submit" style="border: none; background-color: white">
+                                            <h1 style="color: red">&hearts;</h1>
+                                        </button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                }
+                @* @foreach (var item in Model)
+            {
+            <div class="col-md-4">
+            <div class="card mb-4 box-shadow">
+            <img class="card-img-top" src="@item.Photo" width="100%" height="225" alt="Card image cap">
+            <div class="card-body">
+            <p class="card-text">@item.Mark</p>
+            <p class="card-text">@item.Model</p>
+            <div class="d-flex justify-content-between align-items-center">
+            <div class="btn-group">
+            <a type="btn btn-success" asp-controller="Club" asp-action="Detail" asp-route-id="@item.Id"
+            class="btn btn-sm btn-outline-secondary">View</a>
+            <a asp-controller="" asp-action="Edit" asp-route-id="@item.Id" class="btn btn-sm btn-outline-secondary">Edit</a>
+            <a asp-controller="" asp-action="Delete" asp-route-id="@item.Id" class="btn btn-sm btn-outline-secondary">Delete</a>
+            </div>
+            <small class="text-muted">@item.Mileage</small>
+            </div>
+            </div>
+            </div>
+            </div>
+            } *@
+            }
+            else
+            {
+                <div class="col-md-4">
+                    <h1>No cars</h1>
+                </div>
+            }
+
+        </div>
+    </div>
+</div>

@@ -9,6 +9,7 @@ using CarLife.Application.Dto;
 using CarLife.Application.Interfaces;
 using CarLife.Core.Entities;
 using CarLife.Infrastructure.Data;
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
@@ -17,11 +18,15 @@ public class CarService : ICarService
 {
   private readonly CarLifeDbContext _context;
   private readonly IMapper _mapper;
+  private readonly IHttpContextAccessor _httpContextAccessor;
 
-  public CarService(CarLifeDbContext context, IMapper mapper)
+  public CarService(CarLifeDbContext context,
+    IMapper mapper,
+    IHttpContextAccessor httpContextAccessor)
   {
     _context = context;
     _mapper = mapper;
+    _httpContextAccessor = httpContextAccessor;
   }
 
   public bool Add(Car newCar)
@@ -149,11 +154,16 @@ public class CarService : ICarService
     return saved > 0 ? true : false;
   }
 
-  
-
   public bool Update(Car car)
   {
     _context.Update(car);
+    return Save();
+  }
+
+
+  public bool Delete(Car car)
+  {
+    _context.Cars.Remove(car);
     return Save();
   }
 }

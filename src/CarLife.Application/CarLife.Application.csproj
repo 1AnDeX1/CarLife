@@ -16,8 +16,4 @@
     <PackageReference Include="AutoMapper" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Dto\Profile\" />
-  </ItemGroup>
-
 </Project>
