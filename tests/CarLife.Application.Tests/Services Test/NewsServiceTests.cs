@@ -271,6 +271,40 @@ public class NewsServiceTests
   }
 
   [Fact]
+  public void GetFilteredNews_ReceiveNewsWithThemes_ZeroIndex()
+  {
+    // Arrange
+    optionBuilder.UseInMemoryDatabase(MethodBase.GetCurrentMethod()?.Name ?? "DefaultDb");
+    List<News> newsList = MainLogic.GenerateNewsList();
+    List<NewsThemes> newsThemes = MainLogic.GenerateThemeList();
+    int filter = 0;
+    // Act
+    using (CarLifeDbContext context = new(optionBuilder.Options))
+    {
+      context.AddRange(newsList);
+      context.AddRange(newsThemes);
+      context.SaveChanges();
+    }
+    IList<News>? result;
+    using (CarLifeDbContext context = new(optionBuilder.Options))
+    {
+      result = new NewsService(context).GetFilteredNews(filter);
+    }
+    // Assert
+    foreach (var news in result)
+    {
+      int id = news.Id - 1;
+      MainLogic.MainNewsCheck(news, newsList[id]);
+
+      news.NewsTheme.Should().NotBeNull();
+      news.NewsTheme.Should().BeOfType<NewsThemes>();
+
+      news.NewsTheme?.Id.Should().BeGreaterThan(0);
+      news.NewsTheme?.Name.Should().NotBeNullOrEmpty();
+    }
+  }
+
+  [Fact]
   public void GetFilteredNews_ReceiveNull_WrongIndex()
   {
     // Arrange
