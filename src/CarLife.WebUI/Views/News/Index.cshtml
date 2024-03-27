@@ -13,10 +13,13 @@
 <body>
     <div class="container">
         <h1 class="my-4">News</h1>
-        <a type="button" class="btn btn-outline-secondary text-white bg-dark nav-link w-25"
-           asp-area="" asp-controller="News" asp-action="Add" style="border-color:white">
-            Add news
-        </a>
+        @if (User.Identity != null && User.Identity.IsAuthenticated && User.IsInRole("admin"))
+        {
+            <a type="button" class="btn btn-outline-secondary text-white bg-dark nav-link w-25"
+               asp-area="" asp-controller="News" asp-action="Add" style="border-color:white">
+                Add news
+            </a>
+        }
         <div class="form-group">
             <label for="sortSelect" class="mt-2">Sort by:</label>
             <select class="form-control mt-2" id="sortSelect">
@@ -25,7 +28,9 @@
                 {
                     foreach (var theme in Model.Themes)
                         {
-                        <option value="@theme?.Id">@theme?.Name</option>
+                        <option value="@theme?.Id" selected="@(Model.SelectedThemeId == theme?.Id ? "selected" : "")">
+                            @(Model.SelectedThemeName == theme?.Name ? $"{theme?.Name} (Selected)" : theme?.Name)
+                        </option>
                     }
                 }
             </select>

@@ -15,15 +15,15 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		Directory.Packages.props = Directory.Packages.props
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CarLife.Core", "src\CarLife.Core\CarLife.Core.csproj", "{AC1106D9-DEE7-4702-B383-E512757932BC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CarLife.Core", "src\CarLife.Core\CarLife.Core.csproj", "{AC1106D9-DEE7-4702-B383-E512757932BC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CarLife.Application", "src\CarLife.Application\CarLife.Application.csproj", "{D117A58E-D376-43AB-AAEF-EEAB769C45D6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CarLife.Application", "src\CarLife.Application\CarLife.Application.csproj", "{D117A58E-D376-43AB-AAEF-EEAB769C45D6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CarLife.Infrastructure.Data", "src\CarLife.Infrastructure.Data\CarLife.Infrastructure.Data.csproj", "{3660E73F-EF93-4DA3-8189-30D530B79542}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CarLife.Infrastructure.Data", "src\CarLife.Infrastructure.Data\CarLife.Infrastructure.Data.csproj", "{3660E73F-EF93-4DA3-8189-30D530B79542}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CarLife.Infrastructure", "src\CarLife.Infrastructure\CarLife.Infrastructure.csproj", "{A163894E-3E0A-4E91-831B-423837201384}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CarLife.Infrastructure", "src\CarLife.Infrastructure\CarLife.Infrastructure.csproj", "{A163894E-3E0A-4E91-831B-423837201384}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CarLife.Shared", "src\CarLife.Shared\CarLife.Shared.csproj", "{28509BC4-9F43-4947-841D-63210C20C027}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CarLife.Shared", "src\CarLife.Shared\CarLife.Shared.csproj", "{28509BC4-9F43-4947-841D-63210C20C027}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CarLife.WebUI", "src\CarLife.WebUI\CarLife.WebUI.csproj", "{31EEF573-2227-4754-B0A5-D90459D8E985}"
 EndProject
@@ -31,21 +31,21 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CarLife.WebAPI", "src\CarLi
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CarLife.IdentityServer", "src\CarLife.IdentityServer\CarLife.IdentityServer.csproj", "{26666192-06C4-40EA-BBE4-E2CB692395F9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CarLife.Application.Tests", "tests\CarLife.Application.Tests\CarLife.Application.Tests.csproj", "{C691E7DE-B539-4427-97ED-08640469B647}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CarLife.Application.Tests", "tests\CarLife.Application.Tests\CarLife.Application.Tests.csproj", "{C691E7DE-B539-4427-97ED-08640469B647}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CartLife.IdentityServer.Tests", "tests\CartLife.IdentityServer.Tests\CartLife.IdentityServer.Tests.csproj", "{37EF1087-201D-4E24-B760-F175D566F6B5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CartLife.IdentityServer.Tests", "tests\CartLife.IdentityServer.Tests\CartLife.IdentityServer.Tests.csproj", "{37EF1087-201D-4E24-B760-F175D566F6B5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CarLife.Core.Tests", "tests\CarLife.Core.Tests\CarLife.Core.Tests.csproj", "{555A632A-38A2-46E5-AAEA-CADE8D460483}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CarLife.Core.Tests", "tests\CarLife.Core.Tests\CarLife.Core.Tests.csproj", "{555A632A-38A2-46E5-AAEA-CADE8D460483}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CarLife.Infrastructure.Tests", "tests\Car.Life.Infrastructure.Tests\CarLife.Infrastructure.Tests.csproj", "{74F61E51-91C6-41D2-B611-CF2B5FFC5609}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CarLife.Infrastructure.Tests", "tests\Car.Life.Infrastructure.Tests\CarLife.Infrastructure.Tests.csproj", "{74F61E51-91C6-41D2-B611-CF2B5FFC5609}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CarLife.Infrastructure.Data.Tests", "tests\Car.Life.Infrastructure.Data.Tests\CarLife.Infrastructure.Data.Tests.csproj", "{B373591A-D051-4CCA-8AAC-F989145E4F79}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CarLife.Infrastructure.Data.Tests", "tests\Car.Life.Infrastructure.Data.Tests\CarLife.Infrastructure.Data.Tests.csproj", "{B373591A-D051-4CCA-8AAC-F989145E4F79}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CarLife.Shared.Tests", "tests\CarLife.Shared.Tests\CarLife.Shared.Tests.csproj", "{F5DC944E-523A-4DFE-888D-4E3A6C12910A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CarLife.Shared.Tests", "tests\CarLife.Shared.Tests\CarLife.Shared.Tests.csproj", "{F5DC944E-523A-4DFE-888D-4E3A6C12910A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CarLife.WebUI.Tests", "tests\CarLife.WebUI.Tests\CarLife.WebUI.Tests.csproj", "{B3BF2CA0-1641-4B3C-AEDB-124115C12952}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CarLife.WebUI.Tests", "tests\CarLife.WebUI.Tests\CarLife.WebUI.Tests.csproj", "{B3BF2CA0-1641-4B3C-AEDB-124115C12952}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CarLife.WebAPI.Tests", "tests\CarLife.WebAPI.Tests\CarLife.WebAPI.Tests.csproj", "{A0D28450-C19A-4517-BBEA-9B5B6AFF81E5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CarLife.WebAPI.Tests", "tests\CarLife.WebAPI.Tests\CarLife.WebAPI.Tests.csproj", "{A0D28450-C19A-4517-BBEA-9B5B6AFF81E5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -5,8 +5,6 @@ using Microsoft.AspNetCore.Mvc;
 using CarLife.Application.Interfaces;
 using CarLife.Application.Classes;
 using CarLife.Application.Dto.Car;
-using Microsoft.EntityFrameworkCore;
-using CarLife.Application.Dto;
 using CarLife.Application.IServices;
 
 namespace CarLife.WebUI.Controllers;

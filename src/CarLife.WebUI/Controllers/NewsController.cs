@@ -22,11 +22,13 @@ public class NewsController : Controller
     var news = _newsService.GetFilteredNews(filter);
     var themes = _newsService.GetAllThemes();
     var newsIndexDto = _mapper.Map<List<NewsIndexDto>>(news);
-
+    var selectedTheme = themes.FirstOrDefault(t => t.Id == filter)?.Name;
+    
     var newsFilterIndexDto = new NewsFilterIndexDto
     {
       News = newsIndexDto,
-      Themes = themes
+      Themes = themes,
+      SelectedThemeName = selectedTheme
     };
 
     return View(newsFilterIndexDto);
@@ -84,7 +86,7 @@ public class NewsController : Controller
       return NotFound();
 
     _newsService.Delete(news);
-
+    
     return RedirectToAction("Index");
   }
 }

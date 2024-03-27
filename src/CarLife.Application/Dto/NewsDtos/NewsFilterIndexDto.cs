@@ -10,4 +10,6 @@ public class NewsFilterIndexDto
 {
   public List<NewsIndexDto>? News { get; set; }
   public List<NewsThemes>? Themes { get; set; }
+  public int? SelectedThemeId { get; set; }
+  public string? SelectedThemeName { get; set; }
 }

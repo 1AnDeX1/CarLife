@@ -17,16 +17,10 @@ namespace CarLife.Application.Services;
 public class CarService : ICarService
 {
   private readonly CarLifeDbContext _context;
-  private readonly IMapper _mapper;
-  private readonly IHttpContextAccessor _httpContextAccessor;
 
-  public CarService(CarLifeDbContext context,
-    IMapper mapper,
-    IHttpContextAccessor httpContextAccessor)
+  public CarService(CarLifeDbContext context)
   {
     _context = context;
-    _mapper = mapper;
-    _httpContextAccessor = httpContextAccessor;
   }
 
   public bool Add(Car newCar)
@@ -44,24 +38,30 @@ public class CarService : ICarService
   {
     return _context.Cars.Include(c => c.User).ToList();
   }
+  
 
   public IList<Car> GetSortedCars(string sort)
   {
-    var cars = GetAll();
+    var cars = GetSortedCarsWithoutToList(sort);
+    return cars.ToList();
+  }
+  public IQueryable<Car> GetSortedCarsWithoutToList(string sort)
+  {
+    IQueryable<Car> cars = _context.Cars;
 
     switch (sort)
     {
       case "priceAsc": 
-        cars = cars.OrderBy(c => c.Price).ToList();
+        cars = cars.OrderBy(c => c.Price);
         break;
       case "priceDesc":
-        cars = cars.OrderByDescending(c => c.Price).ToList();
+        cars = cars.OrderByDescending(c => c.Price);
         break;
       case "dateAsc":
-        cars = cars.OrderBy(c => c.YearOfManufecture).ToList();
+        cars = cars.OrderBy(c => c.YearOfManufecture);
         break;
       case "dateDesc":
-        cars = cars.OrderByDescending(c => c.YearOfManufecture).ToList();
+        cars = cars.OrderByDescending(c => c.YearOfManufecture);
         break;
     }
 
@@ -71,15 +71,16 @@ public class CarService : ICarService
   {
     if (carSortItems.Sort == null)
       carSortItems.Sort = "default";
-    var cars = GetSortedCars(carSortItems.Sort);
+
+    //IQueryable<Car> cars = _context.Cars;
+    var cars = GetSortedCarsWithoutToList(carSortItems.Sort);
     //mark
     if (carSortItems.Mark != null)
     {
       cars = cars.Where(c => 
         c.Mark != null && 
         c.Mark.ToLower()
-          .StartsWith(carSortItems.Mark.ToLower()))
-          .ToList();
+          .StartsWith(carSortItems.Mark.ToLower()));
     }
     //model
     if (carSortItems.Model != null)
@@ -87,48 +88,47 @@ public class CarService : ICarService
       cars = cars.Where(c =>
         c.Model != null &&
         c.Model.ToLower()
-          .StartsWith(carSortItems.Model.ToLower()))
-          .ToList();
+          .StartsWith(carSortItems.Model.ToLower()));
     }
     //price
     if (carSortItems.PriceFrom.HasValue && carSortItems.PriceTo.HasValue)
     {
-      cars = cars.Where(p => p.Price >= carSortItems.PriceFrom && p.Price <= carSortItems.PriceTo).ToList();  
+      cars = cars.Where(p => p.Price >= carSortItems.PriceFrom && p.Price <= carSortItems.PriceTo);  
     }
     else if (carSortItems.PriceFrom.HasValue)
     {
-      cars = cars.Where(p => p.Price >= carSortItems.PriceFrom).ToList();
+      cars = cars.Where(p => p.Price >= carSortItems.PriceFrom);
     }
     else if (carSortItems.PriceTo.HasValue)
     {
-      cars = cars.Where(p => p.Price <= carSortItems.PriceTo).ToList();
+      cars = cars.Where(p => p.Price <= carSortItems.PriceTo);
     }
 
     //mileage
     if (carSortItems.MileageFrom.HasValue && carSortItems.MileageTo.HasValue)
     {
-      cars = cars.Where(p => p.Mileage >= carSortItems.MileageFrom && p.Mileage <= carSortItems.MileageTo).ToList();
+      cars = cars.Where(p => p.Mileage >= carSortItems.MileageFrom && p.Mileage <= carSortItems.MileageTo);
     }
     else if (carSortItems.MileageFrom.HasValue)
     {
-      cars = cars.Where(p => p.Mileage >= carSortItems.MileageFrom).ToList();
+      cars = cars.Where(p => p.Mileage >= carSortItems.MileageFrom);
     }
     else if (carSortItems.MileageTo.HasValue)
     {
-      cars = cars.Where(p => p.Mileage <= carSortItems.MileageTo).ToList();
+      cars = cars.Where(p => p.Mileage <= carSortItems.MileageTo);
     }
     //date
     if (carSortItems.YearOfManufectureFrom.HasValue && carSortItems.YearOfManufectureTo.HasValue)
     {
-      cars = cars.Where(p => p.YearOfManufecture >= carSortItems.YearOfManufectureFrom && p.YearOfManufecture <= carSortItems.YearOfManufectureTo).ToList();
+      cars = cars.Where(p => p.YearOfManufecture >= carSortItems.YearOfManufectureFrom && p.YearOfManufecture <= carSortItems.YearOfManufectureTo);
     }
     else if (carSortItems.YearOfManufectureFrom.HasValue)
     {
-      cars = cars.Where(p => p.YearOfManufecture >= carSortItems.YearOfManufectureFrom).ToList();
+      cars = cars.Where(p => p.YearOfManufecture >= carSortItems.YearOfManufectureFrom);
     }
     else if (carSortItems.YearOfManufectureTo.HasValue)
     {
-      cars = cars.Where(p => p.YearOfManufecture <= carSortItems.YearOfManufectureTo).ToList();
+      cars = cars.Where(p => p.YearOfManufecture <= carSortItems.YearOfManufectureTo);
     }
     //city
     if (carSortItems.City != null)
@@ -136,11 +136,10 @@ public class CarService : ICarService
       cars = cars.Where(c =>
         c.City != null &&
         c.City.ToLower()
-          .StartsWith(carSortItems.City.ToLower()))
-          .ToList();
+          .StartsWith(carSortItems.City.ToLower()));
     }
 
-    return cars;
+    return cars.ToList();
   }
 
   public Car? GetById(int id)
